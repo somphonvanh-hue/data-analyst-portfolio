@@ -36,4 +36,4 @@
 ## ลิงก์ (Links)
 
 - [แดชบอร์ด Looker Studio](https://public.tableau.com/app/profile/nynon/viz/cafe-sales-dashboard) - แดชบอร์ดแสดงผลการวิเคราะห์แบบโต้ตอบ
-- [เอกสารโครงการบน Notion](https://www.notion.so/nynon/cafe-sales-analysis) - รายละเอียดขั้นตอนการวิเคราะห์และข้อสรุป
+- [เอกสารโครงการบน Notion](https://app.notion.com/p/SQL-3fcea3e865eb81388bead093b6b1a2a9) - รายละเอียดขั้นตอนการวิเคราะห์และข้อสรุป

@@ -39,4 +39,4 @@
 ## ลิงก์ (Links)
 
 - [แดชบอร์ด Looker Studio](https://public.tableau.com/app/profile/nynon/viz/hr-attrition-dashboard) - แดชบอร์ดแสดงผลการวิเคราะห์แบบโต้ตอบ
-- [เอกสารโครงการบน Notion](https://www.notion.so/nynon/hr-attrition-analysis) - รายละเอียดขั้นตอนการวิเคราะห์และข้อสรุป
+- [เอกสารโครงการบน Notion](https://app.notion.com/p/SQL-HR-Analytics-3fcea3e865eb81538c91c84a3f0c2d0d) - รายละเอียดขั้นตอนการวิเคราะห์และข้อสรุป
