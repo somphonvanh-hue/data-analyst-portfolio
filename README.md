@@ -1,8 +1,12 @@
 # Data Analyst Portfolio
 
-I'm Nynon, a data analyst passionate about turning raw data into actionable insights that drive better business decisions. Through exploratory analysis, data visualization, and clear storytelling, I help uncover patterns and opportunities hidden within complex datasets. 
+สวัสดี ผม Nynon กำลังฝึกเป็นนักวิเคราะห์ข้อมูล โดยใช้เครื่องมือ Excel/Google Sheets, SQL, Python และ Looker Studio ในการวิเคราะห์ข้อมูลและนำเสนอผลลัพธ์ในรูปแบบที่เข้าใจง่าย
 
-Here are some of my recent projects: 
+ความสนใจ: การวิเคราะห์ธุรกิจ, การค้นหาแนวโน้มจากข้อมูล และการสร้างแดชบอร์ดเพื่อสนับสนุนการตัดสินใจ
 
-- [**HR Attrition Analysis**](./hr-attrition/) - Analyzing employee attrition patterns to help identify retention strategies
-- [**Cafe Sales Analysis**](./cafe-sales/) - Exploring sales trends and customer behavior to optimize cafe operations
+ข้อมูลทั้งหมดในพอร์ตโฟลิโอนี้เป็นข้อมูลสมมติเพื่อการฝึกวิเคราะห์เท่านั้น
+
+## โปรเจกต์
+
+- [HR Attrition](hr-attrition/): การวิเคราะห์อัตราการลาออกของพนักงาน พบว่าพนักงานที่จ้างในปี 2011 มีอัตราการลาออกสูงถึง 71% ส่งผลให้อัตราการลาออกรวมอยู่ที่ 33.4%
+- [Cafe Sales](cafe-sales/): การวิเคราะห์ยอดขายร้านกาแฟ พบว่าเครื่องดื่มสร้างรายได้กว่า 55% ของยอดขายทั้งหมด และช่วงเวลาเที่ยง-บ่ายเป็นช่วงที่มียอดขายสูงที่สุด

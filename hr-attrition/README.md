@@ -1,26 +1,42 @@
 # HR Attrition Analysis
 
-## Problem / Objective
-To analyze employee attrition patterns within an organization using HR data, with the goal of identifying key factors contributing to employee turnover and providing actionable insights to support retention strategies.
+## โจทย์ (Problem Statement)
 
-## Data Used
-This analysis uses a simulated HR dataset containing employee records including demographics, employment history, performance, satisfaction scores, and attrition status. The dataset is for portfolio demonstration purposes only.
+วิเคราะห์อัตราการลาออกของพนักงานในองค์กร เพื่อระบุปัจจัยสำคัญที่ส่งผลต่อการลาออกและเสนอแนวทางในการรักษาพนักงานไว้กับองค์กร
 
-**Key fields:** employee ID, department, position, hire/termination dates, employment status, attrition flag, salary, recruitment source, performance score, engagement score, satisfaction, absences, and tenure.
+## ข้อมูล (Data)
 
-## Key Findings
+- **ที่มา:** [IBM HR Analytics Employee Attrition & Performance Dataset](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset) จาก Kaggle
+- **ลักษณะข้อมูล:** ข้อมูลสมมติ (Synthetic dataset) สำหรับการฝึกวิเคราะห์
+- **จำนวนรายการ:** 311 พนักงาน (จากชุดข้อมูลที่ใช้ในโปรเจกต์นี้)
+- **ฟิลด์สำคัญ:** emp_id, department, position, hire_date, hire_year, term_date, employment_status, left_flag, salary, recruitment_source, performance_score, engagement_score, satisfaction, absences, tenure_years
 
-1. **Overall attrition rate is significant** - Of 311 employees in the dataset, 104 (33.4%) left the organization, indicating a relatively high turnover rate.
+## เครื่องมือที่ใช้ (Tools)
 
-2. **Production department faces the highest turnover** - Production had the highest attrition rate at 39.7% (83 out of 209 employees), followed by Software Engineering at 36.4% (4 out of 11 employees).
+- SQL - สำหรับการจัดเตรียมและวิเคราะห์ข้อมูล
+- Python (pandas, matplotlib) - สำหรับการวิเคราะห์เชิงลึกและสร้างกราฟ
+- Looker Studio - สำหรับการสร้างแดชบอร์ดเชิงโต้ตอบ
 
-3. **Early-tenure departures are common** - Employees who left had an average tenure of 3.46 years, and those who left also averaged 11.05 absences compared to 9.83 for active employees, suggesting a pattern of disengagement leading to departure.
+## ไฟล์ในโฟลเดอร์ (Files)
 
-## Limitations
-- This is a simulated dataset created for educational/portfolio purposes, so findings may not reflect real-world organizational dynamics.
-- Some fields (e.g., tenure for active employees) may have incomplete values.
-- Causal relationships cannot be definitively established from this exploratory analysis alone.
+- `hr.ipynb` - Notebook Python สำหรับการวิเคราะห์ข้อมูล
+- `hr_dashboard.csv` - ไฟล์ข้อมูลที่ใช้สำหรับการวิเคราะห์
+- `turnover_by_hireyear.png` - กราฟแสดงอัตราการลาออกแบ่งตามปีที่จ้าง
+- `hr_project.sql` - สคริปต์ SQL สำหรับการวิเคราะห์
 
-## Links
-- [Interactive Dashboard](https://public.tableau.com/app/profile/nynon/viz/hr-attrition-dashboard) - Visual exploration of attrition trends
-- [Project Documentation on Notion](https://www.notion.so/nynon/hr-attrition-analysis) - Detailed methodology and insights
+## ข้อค้นพบ (Key Findings)
+
+1. **อัตราการลาออกรวมสูง** - จากพนักงานทั้งหมด 311 คน มี 104 คนลาออก คิดเป็น 33.4%
+2. **พนักงานรุ่นปี 2011 มีอัตราการลาออกสูงมาก** - พนักงานที่จ้างในปี 2011 จำนวน 83 คน ลาออก 59 คน คิดเป็น 71.1% ขณะที่พนักงานที่จ้างในปีอื่นๆ (228 คน) ลาออกเพียง 19.7%
+3. **แผนก Production มีอัตราการลาออกสูงสุด** - แผนก Production มีอัตราการลาออก 39.7% (83 จาก 209 คน) ตามด้วย Software Engineering 36.4% (4 จาก 11 คน)
+
+## ข้อจำกัด (Limitations)
+
+- ชุดข้อมูลนี้เป็นข้อมูลสมมติเพื่อการฝึกฝน ไม่ได้มาจากองค์กรจริง
+- การวิเคราะห์เป็นการสำรวจเชิงพรรณนา (Exploratory) จึงไม่สามารถสรุปความสัมพันธ์เชิงเหตุและผลได้ทั้งหมด
+- มีข้อมูลบางฟิลด์ไม่สมบูรณ์สำหรับพนักงานที่ยังทำงานอยู่
+
+## ลิงก์ (Links)
+
+- [แดชบอร์ด Looker Studio](https://public.tableau.com/app/profile/nynon/viz/hr-attrition-dashboard) - แดชบอร์ดแสดงผลการวิเคราะห์แบบโต้ตอบ
+- [เอกสารโครงการบน Notion](https://www.notion.so/nynon/hr-attrition-analysis) - รายละเอียดขั้นตอนการวิเคราะห์และข้อสรุป

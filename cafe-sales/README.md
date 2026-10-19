@@ -1,26 +1,39 @@
 # Cafe Sales Analysis
 
-## Problem / Objective
-To analyze cafe sales data and identify key trends in customer purchasing behavior, peak sales periods, and revenue drivers. The goal is to provide insights that can help optimize menu offerings, staffing, and overall business performance.
+## โจทย์ (Problem Statement)
 
-## Data Used
-This analysis uses a simulated cafe sales dataset containing transaction records with details on items sold, quantities, prices, timestamps, and product categories. The dataset is for portfolio demonstration purposes only.
+วิเคราะห์ยอดขายของร้านกาแฟเพื่อระบุแนวโน้มการซื้อของลูกค้า ช่วงเวลาที่มียอดขายสูงสุด และปัจจัยที่ส่งผลต่อรายได้ โดยมีเป้าหมายเพื่อใช้เป็นข้อมูลในการปรับปรุงเมนู การจัดกำลังพนักงาน และการดำเนินธุรกิจให้มีประสิทธิภาพมากขึ้น
 
-**Key fields:** transaction ID, date/time, product category, item name, quantity sold, unit price, total sales, and payment method.
+## ข้อมูล (Data)
 
-## Key Findings
+- **ที่มา:** ข้อมูลสมมติที่สร้างขึ้นสำหรับการฝึกวิเคราะห์พอร์ตโฟลิโอนี้
+- **ลักษณะข้อมูล:** ข้อมูลสมมติ (Synthetic dataset) สำหรับการฝึกวิเคราะห์
+- **จำนวนรายการ:** ข้อมูลธุรกรรมการขายร้านกาแฟ
+- **ฟิลด์สำคัญ:** transaction_id, date/time, product_category, item_name, quantity_sold, unit_price, total_sales, payment_method
 
-1. **Peak sales occur during mid-day hours** - Lunch hours (12:00 PM - 2:00 PM) accounted for approximately 40% of total daily transactions, making it the busiest period for the cafe.
+## เครื่องมือที่ใช้ (Tools)
 
-2. **Beverages drive the majority of revenue** - Drinks (including coffee, tea, and specialty beverages) represented about 55% of total revenue, while food items accounted for the remaining 45%.
+- SQL - สำหรับการจัดเตรียมและวิเคราะห์ข้อมูล
+- Python (pandas, matplotlib, seaborn) - สำหรับการวิเคราะห์เชิงลึกและสร้างกราฟ
+- Looker Studio - สำหรับการสร้างแดชบอร์ดเชิงโต้ตอบ
 
-3. **Weekends see higher average spend** - Weekend transactions showed a 28% higher average order value compared to weekday transactions, suggesting customers are more likely to purchase additional items or higher-priced products.
+## ไฟล์ในโฟลเดอร์ (Files)
 
-## Limitations
-- This is a simulated dataset created for educational/portfolio purposes, so trends may not reflect real cafe operations.
-- Seasonal variations and promotional effects are not fully captured in this dataset.
-- Customer demographics and loyalty data are not included, limiting deeper segmentation analysis.
+- `cafe_project.sql` - สคริปต์ SQL สำหรับการวิเคราะห์ยอดขายร้านกาแฟ
 
-## Links
-- [Interactive Dashboard](https://public.tableau.com/app/profile/nynon/viz/cafe-sales-dashboard) - Visual exploration of sales trends
-- [Project Documentation on Notion](https://www.notion.so/nynon/cafe-sales-analysis) - Detailed methodology and insights
+## ข้อค้นพบ (Key Findings)
+
+1. **ช่วงเที่ยง-บ่ายเป็นช่วงเวลาที่มียอดขายสูงสุด** - ช่วงเวลา 12:00 - 14:00 น. มีสัดส่วนธุรกรรมประมาณ 40% ของยอดขายรายวัน
+2. **เครื่องดื่มสร้างรายได้หลัก** - เครื่องดื่ม (กาแฟ ชา และเครื่องดื่มพิเศษ) สร้างรายได้ประมาณ 55% ของรายได้ทั้งหมด ขณะที่อาหารสร้างรายได้ 45%
+3. **สุดสัปดาห์มีค่าเฉลี่ยต่อใบเสร็จสูงกว่าภาควันทำงาน** - ค่าเฉลี่ยต่อใบเสร็จในวันหยุดสุดสัปดาห์สูงกว่าวันทำงานประมาณ 28%
+
+## ข้อจำกัด (Limitations)
+
+- ข้อมูลนี้เป็นข้อมูลสมมติเพื่อการฝึกวิเคราะห์ ไม่ได้มาจากร้านกาแฟจริง
+- ยังไม่มีข้อมูลลักษณะลูกค้า (Customer demographics) และข้อมูลสมาชิกสะสมแต้ม
+- การวิเคราะห์ยังไม่ครอบคลุมปัจจัยด้านฤดูกาล โปรโมชั่น หรือเหตุการณ์พิเศษ
+
+## ลิงก์ (Links)
+
+- [แดชบอร์ด Looker Studio](https://public.tableau.com/app/profile/nynon/viz/cafe-sales-dashboard) - แดชบอร์ดแสดงผลการวิเคราะห์แบบโต้ตอบ
+- [เอกสารโครงการบน Notion](https://www.notion.so/nynon/cafe-sales-analysis) - รายละเอียดขั้นตอนการวิเคราะห์และข้อสรุป
