@@ -19,7 +19,7 @@
 
 ## ไฟล์ในโฟลเดอร์ (Files)
 
-- `cafe_data_setup.sql` - สคริปต์ SQL สำหรับการวิเคราะห์ยอดขายร้านกาแฟ
+- `cafe_data_setup.sql` - สคริปต์ SQL สำหรับเตรียมข้อมูล
 
 ## ข้อค้นพบ (Key Findings)
 
