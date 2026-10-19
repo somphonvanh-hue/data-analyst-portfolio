@@ -20,6 +20,7 @@
 ## ไฟล์ในโฟลเดอร์ (Files)
 
 - `cafe_data_setup.sql` - สคริปต์ SQL สำหรับเตรียมข้อมูล
+- `cafe_analysis.sql` - สคริปต์ SQL สำหรับการวิเคราะห์
 
 ## ข้อค้นพบ (Key Findings)
 

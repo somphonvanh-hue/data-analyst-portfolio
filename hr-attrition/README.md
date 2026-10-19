@@ -23,6 +23,7 @@
 - `hr_dashboard.csv` - ไฟล์ข้อมูลที่ใช้สำหรับการวิเคราะห์
 - `turnover_by_hireyear.png` - กราฟแสดงอัตราการลาออกแบ่งตามปีที่จ้าง
 - `hr_data_setup.sql` - สคริปต์ SQL สำหรับเตรียมข้อมูล
+- `hr_analysis.sql` - สคริปต์ SQL สำหรับการวิเคราะห์
 
 ## ข้อค้นพบ (Key Findings)
 
