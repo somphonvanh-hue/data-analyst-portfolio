@@ -1,100 +1,147 @@
--- CAFE SALES ANALYSIS
--- Data: Simulated cafe sales dataset for portfolio purposes
--- Tool: SQL
+-- CAFE SALES ANALYSIS (ข้อมูลสมมติ 1-16 ต.ค. 2026, 343 บิล, 504 รายการ)
+-- รันหลัง cafe_data_setup.sql | ตาราง: menu, orders, order_items | เครื่องมือ: SQLite
 
--- Q1: รายได้รวมทั้งหมด
--- ผล: Total revenue across all transactions
-SELECT 
-  SUM(total_sales) AS total_revenue
-FROM cafe_transactions;
+-- Q1a: จำนวนบิลทั้งหมด
+SELECT COUNT(*) AS total_bills
+FROM orders;
+-- ผลลัพธ์ (total_bills):
+--   343
 
--- Q2: จำนวนธุรกรรมทั้งหมด
--- ผล: Total number of transactions
-SELECT 
-  COUNT(*) AS total_transactions
-FROM cafe_transactions;
+-- Q1b: จำนวนบิลแยกตามช่องทาง
+SELECT channel, COUNT(*) AS bill_count
+FROM orders
+GROUP BY channel;
+-- ผลลัพธ์ (channel, bill_count):
+--   หน้าร้าน | 254
+--   เดลิเวอรี่ | 89
 
--- Q3: จำนวนสินค้าที่ขายทั้งหมด
--- ผล: Total items sold
-SELECT 
-  SUM(quantity_sold) AS total_items_sold
-FROM cafe_transactions;
+-- Q2: สัดส่วนบิลแยกตามวิธีชำระเงิน (%)
+SELECT payment,
+       COUNT(*) AS bill_count,
+       ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM orders), 2) AS percentage
+FROM orders
+GROUP BY payment;
+-- ผลลัพธ์ (payment, bill_count, percentage):
+--   บัตร | 37 | 10.79
+--   เงินสด | 143 | 41.69
+--   โอน QR | 163 | 47.52
 
--- Q4: ยอดขายแยกตามหมวดสินค้า
--- ผล: Revenue breakdown by product category
-SELECT 
-  product_category,
-  SUM(total_sales) AS revenue,
-  ROUND(SUM(total_sales) * 100.0 / (SELECT SUM(total_sales) FROM cafe_transactions), 2) AS pct
-FROM cafe_transactions
-GROUP BY product_category
-ORDER BY revenue DESC;
+-- Q3: ยอดขายรวมและกำไรรวม
+SELECT SUM(m.price * oi.quantity) AS total_sales,
+       SUM((m.price - m.cost) * oi.quantity) AS total_profit
+FROM order_items oi
+JOIN menu m ON oi.item_id = m.item_id;
+-- ผลลัพธ์ (total_sales, total_profit):
+--   16625000 | 10587000
 
--- Q5: สินค้าที่ขายดีที่สุด 5 อันดับ (เรียงตามจำนวนที่ขาย)
--- ผล: Top 5 best-selling items by quantity
-SELECT 
-  item_name,
-  SUM(quantity_sold) AS total_qty,
-  SUM(total_sales) AS revenue
-FROM cafe_transactions
-GROUP BY item_name
-ORDER BY total_qty DESC
-LIMIT 5;
+-- Q4: เมนูที่กำไรรวมสูงสุด 3 อันดับ
+SELECT m.item_name, m.category,
+       SUM((m.price - m.cost) * oi.quantity) AS total_profit
+FROM order_items oi
+JOIN menu m ON oi.item_id = m.item_id
+GROUP BY m.item_id, m.item_name, m.category
+ORDER BY total_profit DESC
+LIMIT 3;
+-- ผลลัพธ์ (item_name, category, total_profit):
+--   แซนด์วิช | อาหาร | 1672000
+--   ลาเต้ | กาแฟ | 1216000
+--   คาปูชิโน่ | กาแฟ | 1178000
 
--- Q6: ยอดขายตามชั่วโมง (Peak hours 12:00-14:00)
--- ผล: Sales distribution by hour to identify peak periods
-SELECT 
-  strftime('%H', datetime) AS hour,
-  COUNT(*) AS transactions,
-  SUM(total_sales) AS revenue
-FROM cafe_transactions
-GROUP BY hour
-ORDER BY hour;
+-- Q5: ยอดขายแยกตามหมวดเมนู
+SELECT m.category, SUM(m.price * oi.quantity) AS total_sales
+FROM order_items oi
+JOIN menu m ON oi.item_id = m.item_id
+GROUP BY m.category
+ORDER BY total_sales DESC;
+-- ผลลัพธ์ (category, total_sales):
+--   กาแฟ | 5920000
+--   เครื่องดื่มอื่น | 4326000
+--   ขนม | 3339000
+--   อาหาร | 3040000
 
--- Q7: เปรียบเทียบยอดขายวันจันทร์-อาทิตย์
--- ผล: Sales by day of week
-SELECT 
-  CASE strftime('%w', datetime)
-    WHEN '0' THEN 'Sunday'
-    WHEN '1' THEN 'Monday'
-    WHEN '2' THEN 'Tuesday'
-    WHEN '3' THEN 'Wednesday'
-    WHEN '4' THEN 'Thursday'
-    WHEN '5' THEN 'Friday'
-    WHEN '6' THEN 'Saturday'
-  END AS day_of_week,
-  COUNT(*) AS transactions,
-  SUM(total_sales) AS revenue,
-  ROUND(AVG(total_sales), 2) AS avg_order_value
-FROM cafe_transactions
-GROUP BY day_of_week
-ORDER BY revenue DESC;
+-- Q6: ยอดขายแยกตามช่องทาง (JOIN 3 ตาราง)
+SELECT o.channel, SUM(m.price * oi.quantity) AS total_sales
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN menu m ON oi.item_id = m.item_id
+GROUP BY o.channel
+ORDER BY total_sales DESC;
+-- ผลลัพธ์ (channel, total_sales):
+--   หน้าร้าน | 12213000
+--   เดลิเวอรี่ | 4412000
 
--- Q8: ช่องทางการชำระเงิน
--- ผล: Payment method breakdown
-SELECT 
-  payment_method,
-  COUNT(*) AS transactions,
-  SUM(total_sales) AS revenue,
-  ROUND(SUM(total_sales) * 100.0 / (SELECT SUM(total_sales) FROM cafe_transactions), 2) AS pct
-FROM cafe_transactions
-GROUP BY payment_method
-ORDER BY revenue DESC;
+-- Q7: 3 ชั่วโมงที่มีบิลมากที่สุด (นับบิล ไม่ JOIN เพื่อกันนับซ้ำ)
+SELECT strftime('%H', order_datetime) AS order_hour,
+       COUNT(DISTINCT order_id) AS total_bills
+FROM orders
+GROUP BY order_hour
+ORDER BY total_bills DESC
+LIMIT 3;
+-- ผลลัพธ์ (order_hour, total_bills):
+--   08 | 60
+--   12 | 49
+--   15 | 41
 
--- Q9: ค่าเฉลี่ยต่อใบเสร็จ (AOV)
--- ผล: Average order value - Weekend vs Weekday
-SELECT 
-  CASE 
-    WHEN strftime('%w', datetime) IN ('0','6') THEN 'Weekend'
-    ELSE 'Weekday'
-  END AS period,
-  ROUND(AVG(total_sales), 2) AS avg_order_value,
-  COUNT(*) AS transactions
-FROM cafe_transactions
-GROUP BY period;
+-- Q8.1: เมนูขายดีที่สุดช่วงเช้า (ก่อน 11:00) ตามจำนวนชิ้น
+SELECT m.item_name, SUM(oi.quantity) AS total_quantity
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN menu m ON oi.item_id = m.item_id
+WHERE time(o.order_datetime) < '11:00:00'
+GROUP BY m.item_id, m.item_name
+ORDER BY total_quantity DESC
+LIMIT 1;
+-- ผลลัพธ์ (item_name, total_quantity):
+--   กาแฟเย็นลาว | 38
 
--- Q10: สัดส่วนธุรกรรมช่วงเที่ยง-บ่าย (12:00-14:00)
--- ผล: Lunch peak period analysis (~40% of daily transactions)
-SELECT 
-  ROUND(COUNT(CASE WHEN CAST(strftime('%H', datetime) AS INT) BETWEEN 12 AND 14 THEN 1 END) * 100.0 / COUNT(*), 2) AS pct_lunch_peak
-FROM cafe_transactions;
+-- Q8.2: เมนูขายดีที่สุดช่วงบ่าย (11:00 เป็นต้นไป) ตามจำนวนชิ้น
+SELECT m.item_name, SUM(oi.quantity) AS total_quantity
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN menu m ON oi.item_id = m.item_id
+WHERE time(o.order_datetime) >= '11:00:00'
+GROUP BY m.item_id, m.item_name
+ORDER BY total_quantity DESC
+LIMIT 1;
+-- ผลลัพธ์ (item_name, total_quantity):
+--   แซนด์วิช | 59
+
+-- Q9: ค่าเฉลี่ยยอดต่อบิล แยกตามช่องทาง (รวมยอดต่อบิลก่อนด้วย CTE)
+WITH order_totals AS (
+  SELECT o.order_id, o.channel,
+         SUM(m.price * oi.quantity) AS bill_total
+  FROM orders o
+  JOIN order_items oi ON o.order_id = oi.order_id
+  JOIN menu m ON oi.item_id = m.item_id
+  GROUP BY o.order_id, o.channel
+)
+SELECT channel, ROUND(AVG(bill_total), 2) AS avg_ticket_size
+FROM order_totals
+GROUP BY channel;
+-- ผลลัพธ์ (channel, avg_ticket_size):
+--   หน้าร้าน | 48082.68
+--   เดลิเวอรี่ | 49573.03
+
+-- Q10: ยอดขายเฉลี่ยต่อวัน แยกตามวันในสัปดาห์ (หารด้วยจำนวนวันที่มีจริง)
+SELECT CASE strftime('%w', o.order_datetime)
+         WHEN '0' THEN 'อาทิตย์' WHEN '1' THEN 'จันทร์'
+         WHEN '2' THEN 'อังคาร' WHEN '3' THEN 'พุธ'
+         WHEN '4' THEN 'พฤหัสบดี' WHEN '5' THEN 'ศุกร์'
+         WHEN '6' THEN 'เสาร์' END AS day_of_week,
+       COUNT(DISTINCT date(o.order_datetime)) AS active_days,
+       SUM(m.price * oi.quantity) AS total_sales,
+       ROUND(SUM(m.price * oi.quantity) * 1.0
+             / COUNT(DISTINCT date(o.order_datetime)), 2) AS avg_sales_per_day
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN menu m ON oi.item_id = m.item_id
+GROUP BY strftime('%w', o.order_datetime), day_of_week
+ORDER BY avg_sales_per_day DESC;
+-- ผลลัพธ์ (day_of_week, active_days, total_sales, avg_sales_per_day):
+--   เสาร์ | 2 | 2811000 | 1405500.0
+--   อาทิตย์ | 2 | 2676000 | 1338000.0
+--   จันทร์ | 2 | 1976000 | 988000.0
+--   ศุกร์ | 3 | 2960000 | 986666.67
+--   อังคาร | 2 | 1826000 | 913000.0
+--   พุธ | 2 | 1778000 | 889000.0
+--   พฤหัสบดี | 3 | 2598000 | 866000.0

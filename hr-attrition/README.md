@@ -6,7 +6,7 @@
 
 ## ข้อมูล (Data)
 
-- **ที่มา:** HRDataset_v14 จากไดเรกทรีข้อมูลองค์กร
+- **ที่มา:** [IBM HR Analytics Employee Attrition & Performance Dataset](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset) จาก Kaggle - ชุดข้อมูล HRDataset_v14 เป็นเวอร์ชันที่ปรับปรุงจากเดิม
 - **ลักษณะข้อมูล:** ข้อมูลองค์กรเกี่ยวกับอัตราการลาออกของพนักงาน
 - **จำนวนรายการ:** 311 พนักงาน
 - **ฟิลด์สำคัญ:** emp_id, department, position, hire_date, hire_year, term_date, employment_status, left_flag, salary, recruitment_source, performance_score, engagement_score, satisfaction, absences, tenure_years
@@ -33,9 +33,10 @@
 
 ## ข้อจำกัด (Limitations)
 
-- ชุดข้อมูลนี้เป็นข้อมูลจาก HRDataset_v14 สำหรับการฝึกฝน ไม่ได้มาจากองค์กรจริง
+- ชุดข้อมูลนี้เป็นข้อมูลจาก Kaggle IBM HR Dataset เวอร์ชัน v14 สำหรับการฝึกฝน ไม่ได้มาจากองค์กรจริง
 - การวิเคราะห์เป็นการสำรวจเชิงพรรณนา (Exploratory) จึงไม่สามารถสรุปความสัมพันธ์เชิงเหตุและผลได้ทั้งหมด
-- ฟิลด์วันที่ออกและอายุงานว่างโดยออกแบบสำหรับพนักงานที่ยังทำงานอยู่  - อัตราการลาออกคำนวณเป็นแบบสะสม (cumulative) ไม่ใช่อัตราต่อปี
+- ฟิลด์วันที่ออกและอายุงานว่างโดยออกแบบสำหรับพนักงานที่ยังทำงานอยู่
+- อัตราการลาออกคำนวณเป็นแบบสะสม (cumulative) ไม่ใช่อัตราต่อปี
 
 ## ลิงก์ (Links)
 
